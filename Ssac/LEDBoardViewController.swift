@@ -18,6 +18,8 @@ class LEDBoardViewController: UIViewController {
     @IBOutlet weak var topView: UIView!
     @IBOutlet var btnList: [UIButton]!
     
+   
+    //MARK: - 뷰 로드
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -25,28 +27,13 @@ class LEDBoardViewController: UIViewController {
         designButton(textColorButton, buttonTitle: "떼잉", highlightedButton: "눌림", backgroundButtonColor: .magenta)
         designTextField()
         
-        resultLabel.backgroundColor = .clear
-        resultLabel.numberOfLines = 0
-        
-        //1. 반복문
-        let buttonArray: [UIButton] = [sendButton, textColorButton]
-        
-        for item in buttonArray {
-            item.backgroundColor = .cyan
-            item.layer.cornerRadius = 5
-        }
-        //2. 아웃렛컬렉션
-        for i in buttonArray {
-            i.backgroundColor = .orange
-            i.layer.cornerRadius = 5
-        }
     }
     
     //MARK: - 메서드 생성
     func designTextField() { //() -> 함수호출 연산자
         userTextField.placeholder = "내용을 작성해주세요"
         userTextField.text = "안녕하세요~"
-        userTextField.keyboardType = .emailAddress
+        userTextField.keyboardType = .default
     }
     
     //buttonOutletVariableName: 외부매개변수, Argument Label
@@ -76,10 +63,10 @@ class LEDBoardViewController: UIViewController {
         view.backgroundColor = .gray
         view.endEditing(true)
         
-        if topView.isHidden == false {
-            topView.isHidden = true
-        } else {
+        if topView.isHidden {
             topView.isHidden = false
+        } else {
+            topView.isHidden = true
         }
     }
     
@@ -92,6 +79,6 @@ class LEDBoardViewController: UIViewController {
     
     @IBAction func exitKeyboard(_ sender: UITextField) {
         userTextField.endEditing(true)
+        userTextField.keyboardType = .numberPad
     }
 }
-
